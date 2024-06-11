@@ -37,7 +37,7 @@ const Page = ({ params }) => {
   let [filters, setFilters] = useState({
     title: "",
     utility: "",
-    side: "T",
+    side: "",
   });
 
   function switchSide() {
@@ -66,10 +66,10 @@ const Page = ({ params }) => {
       </Typography>
       </div>
       
-      <button onClick={switchSide}>SWITCH</button>
+      {/* <button onClick={switchSide}>SWITCH</button>
       <p className={`${filters.side === "T" ? "brown-300" : "blue-500"}`}>
         {filters.side}
-      </p>
+      </p> */}
       <NadeFilter filters={filters} set={setFilters} />
 
       <div className="flex flex-row">
@@ -92,7 +92,7 @@ const Page = ({ params }) => {
           .filter(
             (el) =>
               el.title.toLowerCase().includes(filters.title.toLowerCase()) &&
-              el.side.toLowerCase() === filters.side.toLowerCase() &&
+              // el.side.toLowerCase() === filters.side.toLowerCase() &&
               el.utility.includes(filters.utility)
           )
           .map((el) => (
