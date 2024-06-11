@@ -33,7 +33,7 @@ export default function NadeFilter({filters, set}) {
       <ToggleButton value="flash">Flash</ToggleButton>
       <ToggleButton value="he">HE</ToggleButton>
       </div>
-      {value && <Button onClick={resetNades}>x</Button>}
+      {value && <Button variant='outlined' onClick={resetNades}>x</Button>}
       
     </ToggleButtonGroup>
   );

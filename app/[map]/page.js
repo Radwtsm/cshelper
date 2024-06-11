@@ -80,9 +80,10 @@ const Page = ({ params }) => {
           onChange={onChange}
           label="Search..."
           variant="filled"
+          sx={{width: '100%'}}
         />
         {filters.title && (
-          <Button onClick={() => setFilters({ ...filters, title: "" })}>
+          <Button variant="outlined" onClick={() => setFilters({ ...filters, title: "" })}>
             x
           </Button>
         )}
