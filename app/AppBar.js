@@ -87,7 +87,7 @@ export default function SearchAppBar() {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'block', sm: 'block' } }}
           >
-            CS2SMOKES
+            <Link href={'/'}>CS2SMOKES</Link>
           </Typography>
           {/* <Search>
             <SearchIconWrapper>
