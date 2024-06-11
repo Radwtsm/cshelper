@@ -92,7 +92,7 @@ const Page = ({ params }) => {
           )
           .map((el) => (
             // <Tip key={el.title} el={el} />
-            <TipCard el={el}/>
+            <TipCard key={el.title} el={el}/>
           ))}
       </ul>
     </>
