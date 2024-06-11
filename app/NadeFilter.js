@@ -8,9 +8,17 @@ export default function NadeFilter({filters, set}) {
   const [value, setValue] = React.useState('');
 
   const handleChange = (event, newAlignment) => {
-    setValue(newAlignment);
+    if (!newAlignment) {
+      set({...filters, utility:''})
+      setValue('')
+    } else {
+      setValue(newAlignment);
 
-    set({...filters,utility:newAlignment})
+      set({...filters,utility:newAlignment})
+    }
+
+
+    // console.log(newAlignment)
   };
 
   function resetNades(){

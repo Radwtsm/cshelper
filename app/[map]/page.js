@@ -25,6 +25,7 @@ import Tip from "../Tip";
 import TipCard from "../TipCard";
 
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import GoTopBtn from "../goTopBtn";
 
 const Page = ({ params }) => {
   let inputRef = useRef();
@@ -71,7 +72,7 @@ const Page = ({ params }) => {
         {filters.side}
       </p> */}
       <NadeFilter filters={filters} set={setFilters} />
-
+      <GoTopBtn/>
       <div className="flex flex-row">
         <TextField
           value={filters.title}
