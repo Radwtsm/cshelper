@@ -45,19 +45,16 @@ export default function TipCard({el}) {
   }
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card >
       <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
-          </Avatar>
-        }
+        
             // action={
             // <IconButton aria-label="settings">
             //     <MoreVertIcon />
             // </IconButton>
             // }
         title={el.title}
+        sx={{fontSize:'1px'}}
         // subheader="September 14, 2016"
       />
       {el.embed_code && <YouTube  videoId={getYoutubeVideoId(el.embed_code)} opts={{height:'100%',width:'100%',}}/>}
