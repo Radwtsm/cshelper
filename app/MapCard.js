@@ -44,7 +44,7 @@ export default function OutlinedCard({ name, code, icon, commento }) {
           <CardContent>
             <div className="flex flex-col jusitfy-center items-center">
             <Typography variant="h5" component="div">
-              NOMEMAPPA
+              {name}
             </Typography>
             <Typography variant="body2">{commento}</Typography>
             </div>
