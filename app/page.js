@@ -23,7 +23,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col gap-2 align-center items-around">
-      {map_list.map((el)=><Link href={`/${el.code}`}><OutlinedCard key={el.code} name={el.name} code={el.code}  icon={el.icon} commento={el.commento}/></Link>)}
+      {map_list.map((el)=><Link key={el.code} href={`/${el.code}`}><OutlinedCard  name={el.name} code={el.code}  icon={el.icon} commento={el.commento}/></Link>)}
       
     {/* <Link href="/mirage">MIRAGE</Link>
     <Link href="/dust">DUST2</Link>
