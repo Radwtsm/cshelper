@@ -24,6 +24,8 @@ import Link from "next/link";
 import Tip from "../Tip";
 import TipCard from "../TipCard";
 
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
 const Page = ({ params }) => {
   let inputRef = useRef();
 
@@ -57,10 +59,13 @@ const Page = ({ params }) => {
 
   return (
     <>
-      <Link href="/">{"BACK <--"}</Link>
-      <Typography variant="h2" gutterBottom>
+      <div className="flex flex-row items-center justify-around ">
+      <Link type="button" href="/"><Button variant="outlined"><ArrowBackIcon fontSize="large"/> back</Button></Link>
+      <Typography sx={{color:'white',my:4}} variant="h5" gutterBottom>
         {params.map.toUpperCase()}
       </Typography>
+      </div>
+      
       <button onClick={switchSide}>SWITCH</button>
       <p className={`${filters.side === "T" ? "brown-300" : "blue-500"}`}>
         {filters.side}
@@ -82,7 +87,7 @@ const Page = ({ params }) => {
           </Button>
         )}
       </div>
-      <ul className="my-5 flex flex-col gap-5">
+      <ul className=" flex flex-col gap-5 my-2">
         {backup_data
           .filter(
             (el) =>

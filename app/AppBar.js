@@ -68,8 +68,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function SearchAppBar() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+    // <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="sticky">
         <Toolbar>
           {/* <IconButton
             size="large"
@@ -85,7 +85,7 @@ export default function SearchAppBar() {
             variant="h6"
             noWrap
             component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+            sx={{ flexGrow: 1, display: { xs: 'block', sm: 'block' } }}
           >
             CSMOKES
           </Typography>
@@ -100,7 +100,7 @@ export default function SearchAppBar() {
           </Search> */}
         </Toolbar>
       </AppBar>
-    </Box>
+    // </Box>
   );
 }
 
