@@ -78,7 +78,7 @@ export default function SearchAppBar() {
             aria-label="open drawer"
             sx={{ mr: 2 }}
           > */}
-           <TemporaryDrawer/>
+           {/* <TemporaryDrawer/> */}
             {/* </IconButton> */}
             
           <Typography
@@ -87,7 +87,7 @@ export default function SearchAppBar() {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'block', sm: 'block' } }}
           >
-            CSMOKES
+            CS2SMOKES
           </Typography>
           {/* <Search>
             <SearchIconWrapper>
@@ -115,7 +115,11 @@ function TemporaryDrawer() {
         {
             name: 'Mirage',
             code:'mirage',
-        }
+        },
+        {
+          name: 'Inferno',
+          code:'inferno',
+      }
     ]
   
     const DrawerList = (

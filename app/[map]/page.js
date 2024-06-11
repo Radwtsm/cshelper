@@ -60,7 +60,7 @@ const Page = ({ params }) => {
 
   return (
     <>
-      <div className="flex flex-row items-center justify-around ">
+      <div className="flex flex-col items-center justify-around ">
       <Link type="button" href="/"><Button variant="outlined"><ArrowBackIcon fontSize="large"/> back</Button></Link>
       <Typography sx={{color:'white',my:4}} variant="h5" gutterBottom>
         {params.map.toUpperCase()}
