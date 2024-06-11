@@ -23,7 +23,7 @@ import NadeFilter from "../NadeFilter";
 import Link from "next/link";
 import Tip from "../Tip";
 
-const page = ({ params }) => {
+const Page = ({ params }) => {
   let inputRef = useRef();
 
   let backup_data = useContext(TipsContext).filter(
@@ -97,4 +97,4 @@ const page = ({ params }) => {
   );
 };
 
-export default page;
+export default Page;
