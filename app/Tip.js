@@ -22,7 +22,7 @@ const Tip = ({ el }) => {
 
   return (
     
-      <Box key={el.title} component="section" sx={{ p: 2, border: "1px dashed grey", height: '40vw' }}>
+      <Box key={el.title} component="section" sx={{ p: 2, border: "1px dashed grey", height: '90vh' }}>
         <h3>{el.title}</h3>
         {el.embed_code && <YouTube  videoId={getYoutubeVideoId(el.embed_code)} opts={{height:'100%',width:'100%',}}/>}
       </Box>

@@ -28,9 +28,9 @@ export default function RootLayout({ children }) {
 
           <Box
             my={4}
-            mx={4}
+            mx={0}
             p={2}
-            sx={{ border: '2px solid grey' }}
+            // sx={{ border: '2px solid grey' }}
           >
 
             {children}

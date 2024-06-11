@@ -22,6 +22,7 @@ import Button from "@mui/material/Button";
 import NadeFilter from "../NadeFilter";
 import Link from "next/link";
 import Tip from "../Tip";
+import TipCard from "../TipCard";
 
 const Page = ({ params }) => {
   let inputRef = useRef();
@@ -81,7 +82,7 @@ const Page = ({ params }) => {
           </Button>
         )}
       </div>
-      <ul className="my-5">
+      <ul className="my-5 flex flex-col gap-5">
         {backup_data
           .filter(
             (el) =>
@@ -90,7 +91,8 @@ const Page = ({ params }) => {
               el.utility.includes(filters.utility)
           )
           .map((el) => (
-            <Tip key={el.title} el={el} />
+            // <Tip key={el.title} el={el} />
+            <TipCard el={el}/>
           ))}
       </ul>
     </>
