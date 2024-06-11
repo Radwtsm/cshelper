@@ -6,6 +6,9 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { CardMedia } from "@mui/material";
+import Image from 'next/image'
+
+
 
 // const bull = (
 //   <Box
@@ -49,12 +52,19 @@ export default function OutlinedCard({ name, code, icon, commento }) {
             <Typography variant="body2">{commento}</Typography>
             </div>
 
-            <CardMedia
+            {/* <CardMedia
               component="img"
               height="90"
-              image={icon}
+              image={`/maps/${code}.png`}
             //   alt="Paella dish"
-            />
+            /> */}
+             <Image
+      src={`/maps/${code}.png`}
+      width={500}
+      height={500}
+
+    />
+
           </CardContent>
         </React.Fragment>
       </Card>
