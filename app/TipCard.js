@@ -151,9 +151,9 @@ export default function TipCard({ el }) {
         <IconButton onClick={() => onTipLike(el)} aria-label="add to favorites">
           {liked === false ? <FavoriteBorderIcon /> : <FavoriteIcon />}
         </IconButton>
-        <IconButton onClick={()=>copyToClipBoard(el)} aria-label="add to favorites">
+        {/* <IconButton onClick={()=>copyToClipBoard(el)} aria-label="add to favorites">
           <ShareIcon/>
-        </IconButton>
+        </IconButton> */}
       </CardActions>
     </Card>
     </>
