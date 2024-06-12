@@ -23,6 +23,10 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import Link from 'next/link';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
+
+import { usePathname } from 'next/navigation'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -67,28 +71,40 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchAppBar() {
+  
+  const pathname = usePathname()
+  const [isBackVisible,setIsBackVisible] = React.useState(false)
+  
+  React.useEffect(()=>{
+  //  console.log(pathname) 
+   if (pathname != '/') {
+    setIsBackVisible(true)
+   } else {
+    setIsBackVisible(false)
+   }
+  }, [pathname])
+  
   return (
     // <Box sx={{ flexGrow: 1 }}>
       <AppBar position="sticky">
-        <Toolbar>
-          {/* <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          > */}
-           {/* <TemporaryDrawer/> */}
-            {/* </IconButton> */}
-            
+        <Toolbar sx={{display:'flex',justifyContent:'center',alignItems:'space-around'}}>
+          <div className='flex flex-row justify-between items-center w-full'>
+          <div className='flex flex-row'>
+          {/* {isBackVisible && <Link type="button" href="/"><Button variant="outlined"><ArrowBackIcon fontSize="small"/> back</Button></Link>} */}
           <Typography
             variant="h6"
             noWrap
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'block', sm: 'block' } }}
           >
-            <Link href={'/'}>CS2SMOKES</Link>
+            <Link style={{position:'relative',right:'0%'}} href={'/'}>CS2SMOKES</Link>
           </Typography>
+          </div>
+
+          <Link href={'/liked'}><BookmarkIcon /></Link>
+          </div>
+
+
           {/* <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -140,7 +156,6 @@ function TemporaryDrawer() {
     return (
       <div>
         <MenuIcon className='mr-3' onClick={toggleDrawer(true)}/>
-        {/* <Button > <MenuIcon /></Button> */}
         <Drawer open={open} onClose={toggleDrawer(false)}>
           {DrawerList}
         </Drawer>

@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 import { red } from '@mui/material/colors';
 import { getAllTips } from "./FireBaseWrapper";
 import { createTheme,ThemeProvider } from "@mui/material";
+import Button from "@mui/material";
 // import { ThemeProvider, createTheme } from '@mui/material/styles';
 // import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
 // // Import the functions you need from the SDKs you need
@@ -55,6 +56,7 @@ const theme = createTheme({
 const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({ children }) {
+
   return (
     <html lang="en">
       <body className={inter.className}>

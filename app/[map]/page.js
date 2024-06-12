@@ -61,7 +61,7 @@ const Page = ({ params }) => {
   return (
     <>
       <div className="flex flex-col items-center justify-around ">
-      <Link type="button" href="/"><Button variant="outlined"><ArrowBackIcon fontSize="large"/> back</Button></Link>
+      
       <Typography sx={{color:'white',my:4}} variant="h5" gutterBottom>
         {params.map.toUpperCase()}
       </Typography>
@@ -89,8 +89,8 @@ const Page = ({ params }) => {
           </Button>
         )}
       </div>
-      <ul className=" flex flex-col gap-5 my-2">
-        {backup_data
+      <div className=" flex flex-col gap-5 my-2">
+        {/* {backup_data
           .filter(
             (el) =>
               el.title.toLowerCase().includes(filters.title.toLowerCase()) &&
@@ -100,8 +100,23 @@ const Page = ({ params }) => {
           .map((el) => (
             // <Tip key={el.title} el={el} />
             <TipCard key={el.title} el={el}/>
-          ))}
-      </ul>
+          ))} */}
+          {
+            backup_data.length > 0 ? backup_data
+            .filter(
+              (el) =>
+                el.title.toLowerCase().includes(filters.title.toLowerCase()) &&
+                // el.side.toLowerCase() === filters.side.toLowerCase() &&
+                el.utility.includes(filters.utility)
+            )
+            .map((el) => (
+              // <Tip key={el.title} el={el} />
+              <TipCard key={el.title} el={el}/>
+            )) : <p>No elements</p>
+          }
+      </div>
+      <Button variant="outlined" onClick={()=>localStorage.setItem('cs2smokes_fav',JSON.stringify([]))}>RESET FAV</Button>
+
     </>
   );
 };
