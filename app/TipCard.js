@@ -102,7 +102,7 @@ export default function TipCard({ el }) {
 
   function copyToClipBoard(el){
 
-    let id = el.title.replaceAll(' ','_').toLowerCase()
+    let id = el.title.replaceAll(' ','_').replaceAll('(','_').replaceAll(')','_').toLowerCase()
 
     console.log('id',id)
     console.log(window.location.href)
@@ -131,7 +131,7 @@ export default function TipCard({ el }) {
     {isCopied &&     <Alert sx={{zIndex:2,position:'fixed',bottom:'4%',left:'4%'}} icon={<CheckIcon fontSize="inherit" />} severity="info">
       {"L'URL è stato copiato negli appunti."}
     </Alert>}
-    <Card id={el.title.replaceAll(' ','_').toLowerCase()}>
+    <Card id={el.title.replaceAll(' ','_').replaceAll('(','_').replaceAll(')','_').toLowerCase()}>
       
       <CardHeader title={el.title} sx={{ fontSize: "1px" }} />
 
