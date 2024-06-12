@@ -70,7 +70,7 @@ const Page = ({ params }) => {
       </Typography>
       </div>
 
-      <div className="flex flex-row items-center justify-around">
+      <div className="flex flex-row items-center justify-around gap-2">
       
       <GoTopBtn/>
       <div className="flex flex-row">
