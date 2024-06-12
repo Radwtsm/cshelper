@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import TipCard from '../TipCard'
 import { Button, Typography } from '@mui/material'
 
-const page = () => {
+const Page = () => {
   const [likedTips, setLikedTips] = useState(JSON.parse(localStorage.getItem('cs2smokes_fav')))
 
   function onResetFav(){
@@ -27,4 +27,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
