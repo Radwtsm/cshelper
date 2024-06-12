@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import * as React from "react";
 import { styled } from "@mui/material/styles";
@@ -16,9 +16,12 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+// import ShareIcon from '@mui/icons-material/Share';
+import Alert from '@mui/material/Alert';
+import CheckIcon from '@mui/icons-material/Check';
 import YouTube from "react-youtube";
+import { Copse } from "next/font/google";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -33,22 +36,26 @@ const ExpandMore = styled((props) => {
 
 export default function TipCard({ el }) {
   const [expanded, setExpanded] = React.useState(false);
-  const [liked,setLiked] = React.useState(()=> isItLiked(el) ? true : false)
+  const [liked, setLiked] = React.useState(() =>
+    isItLiked(el) ? true : false
+  );
+
+  const [isCopied,setIsCopied] = React.useState(false)
 
   function isItLiked(element) {
+    let local = JSON.parse(localStorage?.getItem("cs2smokes_fav"));
 
-    let local = JSON.parse(localStorage?.getItem('cs2smokes_fav'))
-
-    let result = local?.find(el_json=> JSON.stringify(el_json) === JSON.stringify(element))
+    let result = local?.find(
+      (el_json) => JSON.stringify(el_json) === JSON.stringify(element)
+    );
 
     if (result) {
       // console.log('liked')
       return true;
     } else {
       // console.log('not liked')
-      return false
+      return false;
     }
-    
   }
 
   const handleExpandClick = () => {
@@ -59,30 +66,28 @@ export default function TipCard({ el }) {
     // console.log('el',el)
 
     if (!localStorage.getItem("cs2smokes_fav")) {
-      localStorage.setItem('cs2smokes_fav',JSON.stringify([]))
+      localStorage.setItem("cs2smokes_fav", JSON.stringify([]));
     } else {
-      let json = JSON.parse(localStorage.getItem("cs2smokes_fav"))
+      let json = JSON.parse(localStorage.getItem("cs2smokes_fav"));
       let isAlreadyPresent = false;
 
-      json.forEach((el_json)=> {
+      json.forEach((el_json) => {
         if (JSON.stringify(el_json) === JSON.stringify(el)) {
           isAlreadyPresent = true;
         }
-      })
+      });
 
       if (!isAlreadyPresent) {
-        json.push(el)
-        localStorage.setItem('cs2smokes_fav',JSON.stringify(json))
-        setLiked(true)
+        json.push(el);
+        localStorage.setItem("cs2smokes_fav", JSON.stringify(json));
+        setLiked(true);
       } else {
-        let filtered = json.filter(json_el => JSON.stringify(json_el) != JSON.stringify(el))
-        localStorage.setItem('cs2smokes_fav',JSON.stringify(filtered))
-        setLiked(false)
+        let filtered = json.filter(
+          (json_el) => JSON.stringify(json_el) != JSON.stringify(el)
+        );
+        localStorage.setItem("cs2smokes_fav", JSON.stringify(filtered));
+        setLiked(false);
       }
-      
-     
-      
-      
     }
     // console.log(JSON.parse(localStorage.getItem("cs2smokes_fav")))
   }
@@ -95,8 +100,39 @@ export default function TipCard({ el }) {
     return match && match[1];
   }
 
+  function copyToClipBoard(el){
+
+    let id = el.title.replaceAll(' ','_').toLowerCase()
+
+    console.log('id',id)
+    console.log(window.location.href)
+
+    let url = window.location.href + '#' + id
+    
+    navigator.clipboard.writeText(url)
+
+    // const shareData = {
+    //   title: el.title,
+    //   text: el.description,
+    //   url,
+    // };
+
+    // navigator.share(shareData)
+
+    // alert('copiato url!')
+    setIsCopied(true)
+    setTimeout(() => {
+      setIsCopied(false)
+    }, 4000);
+  }
+
   return (
-    <Card>
+    <>
+    {isCopied &&     <Alert sx={{zIndex:2,position:'fixed',bottom:'4%',left:'4%'}} icon={<CheckIcon fontSize="inherit" />} severity="info">
+      L'URL è stato copiato negli appunti.
+    </Alert>}
+    <Card id={el.title.replaceAll(' ','_').toLowerCase()}>
+      
       <CardHeader title={el.title} sx={{ fontSize: "1px" }} />
 
       {el.embed_code && (
@@ -112,11 +148,14 @@ export default function TipCard({ el }) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton onClick={()=> onTipLike(el)} aria-label="add to favorites">
-        {liked === false ? <FavoriteBorderIcon/> : <FavoriteIcon />} 
+        <IconButton onClick={() => onTipLike(el)} aria-label="add to favorites">
+          {liked === false ? <FavoriteBorderIcon /> : <FavoriteIcon />}
         </IconButton>
-       
+        <IconButton onClick={()=>copyToClipBoard(el)} aria-label="add to favorites">
+          <ShareIcon/>
+        </IconButton>
       </CardActions>
     </Card>
+    </>
   );
 }
