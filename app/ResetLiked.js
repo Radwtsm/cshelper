@@ -37,12 +37,6 @@ export default function AlertDialog({onaccept}) {
         <DialogTitle id="alert-dialog-title">
           {"Eliminare tutti i preferiti?"}
         </DialogTitle>
-        {/* <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Let Google help apps determine location. This means sending anonymous
-            location data to Google, even when no apps are running.
-          </DialogContentText>
-        </DialogContent> */}
         <DialogActions>
           <Button onClick={handleClose}>NO</Button>
           <Button onClick={resetClose} autoFocus>

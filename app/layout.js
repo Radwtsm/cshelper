@@ -14,10 +14,10 @@ const theme = responsiveFontSizes(createTheme({
   palette: {
     mode:'dark',
     primary: {
-      main: red[500],
+      main: red[700],
     },
     secondary: {
-      main: '#f44336',
+      main: red[200],
     },
   },
 }))
