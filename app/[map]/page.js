@@ -30,6 +30,8 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import GoTopBtn from "../goTopBtn";
 import { InputAdornment } from "@mui/material";
 
+import {Alert} from "@mui/material";
+
 const Page = ({ params }) => {
   let inputRef = useRef();
 
@@ -115,7 +117,12 @@ const Page = ({ params }) => {
       <div className=" flex flex-col gap-5 my-2">
 
           {
-            backup_data.length > 0 ? backup_data
+            backup_data
+            .filter(
+              (el) =>
+                el.title.toLowerCase().includes(filters.title.toLowerCase()) &&
+                el.utility.includes(filters.utility)
+            ).length > 0 ? backup_data
             .filter(
               (el) =>
                 el.title.toLowerCase().includes(filters.title.toLowerCase()) &&
@@ -123,7 +130,7 @@ const Page = ({ params }) => {
             )
             .map((el) => (
               <TipCard key={el.title} el={el}/>
-            )) : <p>No elements</p>
+            )) : <Alert severity="error">{'Non è stato trovato nessun elemento'}</Alert>
           }
 
       </div>
