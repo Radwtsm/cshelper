@@ -6,11 +6,11 @@ import SearchAppBar from "./AppBar";
 import Box from '@mui/material/Box';
 import { red } from '@mui/material/colors';
 import { getAllTips } from "./FireBaseWrapper";
-import { createTheme,ThemeProvider } from "@mui/material";
+import { createTheme,ThemeProvider, responsiveFontSizes } from "@mui/material";
 import Button from "@mui/material";
 // import { CookiesProvider } from 'next-client-cookies/server';
 
-const theme = createTheme({
+const theme = responsiveFontSizes(createTheme({
   palette: {
     mode:'dark',
     primary: {
@@ -20,8 +20,10 @@ const theme = createTheme({
       main: '#f44336',
     },
   },
-});
+}))
 const inter = Inter({ subsets: ["latin"] });
+
+// theme = responsiveFontSizes(theme)
 
 export default function RootLayout({ children }) {
 
