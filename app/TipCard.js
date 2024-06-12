@@ -40,10 +40,8 @@ export default function TipCard({ el }) {
     let result = local.find(el_json=> JSON.stringify(el_json) === JSON.stringify(element))
 
     if (result) {
-      // console.log('liked')
       return true;
     } else {
-      // console.log('not liked')
       return false
     }
     
@@ -82,7 +80,6 @@ export default function TipCard({ el }) {
       
       
     }
-    // console.log(JSON.parse(localStorage.getItem("cs2smokes_fav")))
   }
 
   function getYoutubeVideoId(url) {

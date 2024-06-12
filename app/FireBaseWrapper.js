@@ -30,5 +30,3 @@ export async function getAllTips() {
   const utilsList = utilsSnapshot.docs.map(doc => doc.data());
   return utilsList;
 }
-
-// export getAllTips;

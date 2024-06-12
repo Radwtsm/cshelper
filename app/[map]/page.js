@@ -66,11 +66,7 @@ const Page = ({ params }) => {
         {params.map.toUpperCase()}
       </Typography>
       </div>
-      
-      {/* <button onClick={switchSide}>SWITCH</button>
-      <p className={`${filters.side === "T" ? "brown-300" : "blue-500"}`}>
-        {filters.side}
-      </p> */}
+
       <NadeFilter filters={filters} set={setFilters} />
       <GoTopBtn/>
       <div className="flex flex-row">
@@ -90,32 +86,20 @@ const Page = ({ params }) => {
         )}
       </div>
       <div className=" flex flex-col gap-5 my-2">
-        {/* {backup_data
-          .filter(
-            (el) =>
-              el.title.toLowerCase().includes(filters.title.toLowerCase()) &&
-              // el.side.toLowerCase() === filters.side.toLowerCase() &&
-              el.utility.includes(filters.utility)
-          )
-          .map((el) => (
-            // <Tip key={el.title} el={el} />
-            <TipCard key={el.title} el={el}/>
-          ))} */}
+
           {
             backup_data.length > 0 ? backup_data
             .filter(
               (el) =>
                 el.title.toLowerCase().includes(filters.title.toLowerCase()) &&
-                // el.side.toLowerCase() === filters.side.toLowerCase() &&
                 el.utility.includes(filters.utility)
             )
             .map((el) => (
-              // <Tip key={el.title} el={el} />
               <TipCard key={el.title} el={el}/>
             )) : <p>No elements</p>
           }
       </div>
-      <Button variant="outlined" onClick={()=>localStorage.setItem('cs2smokes_fav',JSON.stringify([]))}>RESET FAV</Button>
+      
 
     </>
   );

@@ -21,7 +21,6 @@ const page = () => {
     <div className=" flex flex-col gap-5 my-2">
         {likedTips.length > 0 ? likedTips.map(el=><TipCard key={el.title} el={el}/>) : <p>No elements</p>}
         <Button variant="outlined" onClick={onResetFav}>RESET FAV</Button>
-        {/* <Button */}
     </div>
     </>
 

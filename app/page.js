@@ -2,7 +2,6 @@ import Image from "next/image";
 import SearchAppBar from "./AppBar";
 import Link from "next/link";
 import OutlinedCard from "./MapCard";
-// import { CardMedia } from "@mui/material";
 
 export default function Home() {
   const map_list = [

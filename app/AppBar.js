@@ -85,12 +85,10 @@ export default function SearchAppBar() {
   }, [pathname])
   
   return (
-    // <Box sx={{ flexGrow: 1 }}>
       <AppBar position="sticky">
         <Toolbar sx={{display:'flex',justifyContent:'center',alignItems:'space-around'}}>
           <div className='flex flex-row justify-between items-center w-full'>
           <div className='flex flex-row'>
-          {/* {isBackVisible && <Link type="button" href="/"><Button variant="outlined"><ArrowBackIcon fontSize="small"/> back</Button></Link>} */}
           <Typography
             variant="h6"
             noWrap
@@ -104,19 +102,8 @@ export default function SearchAppBar() {
           <Link href={'/liked'}><BookmarkIcon /></Link>
           </div>
 
-
-          {/* <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Search> */}
         </Toolbar>
       </AppBar>
-    // </Box>
   );
 }
 

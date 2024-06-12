@@ -16,9 +16,6 @@ export default function NadeFilter({filters, set}) {
 
       set({...filters,utility:newAlignment})
     }
-
-
-    // console.log(newAlignment)
   };
 
   function resetNades(){
