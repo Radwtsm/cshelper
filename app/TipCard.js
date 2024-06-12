@@ -1,3 +1,5 @@
+// 'use client'
+
 import * as React from "react";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
@@ -15,6 +17,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+// import { useCookies } from 'next-client-cookies';
 
 import YouTube from "react-youtube";
 
@@ -31,20 +34,11 @@ const ExpandMore = styled((props) => {
 
 export default function TipCard({ el }) {
   const [expanded, setExpanded] = React.useState(false);
-  const [liked,setLiked] = React.useState(()=> isItLiked(el) ? true : false)
+  // const [liked,setLiked] = React.useState(()=> isItLiked(el) ? true : false)
+  
 
   function isItLiked(element) {
 
-    let local = JSON.parse(localStorage.getItem('cs2smokes_fav'))
-
-    let result = local.find(el_json=> JSON.stringify(el_json) === JSON.stringify(element))
-
-    if (result) {
-      return true;
-    } else {
-      return false
-    }
-    
   }
 
   const handleExpandClick = () => {
@@ -52,34 +46,7 @@ export default function TipCard({ el }) {
   };
 
   function onTipLike(el) {
-    // console.log('el',el)
 
-    if (!localStorage.getItem("cs2smokes_fav")) {
-      localStorage.setItem('cs2smokes_fav',JSON.stringify([]))
-    } else {
-      let json = JSON.parse(localStorage.getItem("cs2smokes_fav"))
-      let isAlreadyPresent = false;
-
-      json.forEach((el_json)=> {
-        if (JSON.stringify(el_json) === JSON.stringify(el)) {
-          isAlreadyPresent = true;
-        }
-      })
-
-      if (!isAlreadyPresent) {
-        json.push(el)
-        localStorage.setItem('cs2smokes_fav',JSON.stringify(json))
-        setLiked(true)
-      } else {
-        let filtered = json.filter(json_el => JSON.stringify(json_el) != JSON.stringify(el))
-        localStorage.setItem('cs2smokes_fav',JSON.stringify(filtered))
-        setLiked(false)
-      }
-      
-     
-      
-      
-    }
   }
 
   function getYoutubeVideoId(url) {
@@ -89,6 +56,20 @@ export default function TipCard({ el }) {
 
     return match && match[1];
   }
+
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storage = localStorage.getItem("preferiti");
+      if (storage) {
+        const preferiti = JSON.parse(storage);
+        console.log(preferiti)
+        // init(preferiti);
+      } else {
+        localStorage.setItem("preferiti",JSON.stringify([]));
+        console.log([])
+      }
+    }
+  }, []);
 
   return (
     <Card>
@@ -107,9 +88,9 @@ export default function TipCard({ el }) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton onClick={()=> onTipLike(el)} aria-label="add to favorites">
-        {liked === false ? <FavoriteBorderIcon/> : <FavoriteIcon />} 
-        </IconButton>
+        {/* <IconButton onClick={()=> onTipLike(el)} aria-label="add to favorites"> */}
+        {/* {liked === false ? <FavoriteBorderIcon/> : <FavoriteIcon />}  */}
+        {/* </IconButton> */}
        
       </CardActions>
     </Card>

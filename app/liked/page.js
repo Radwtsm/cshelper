@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import TipCard from '../TipCard'
 import { Button, Typography } from '@mui/material'
 
@@ -13,6 +13,8 @@ const Page = () => {
     
     
   }
+
+//   useEffect(,)
 
   return (
     <>    

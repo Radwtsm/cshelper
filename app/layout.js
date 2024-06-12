@@ -1,6 +1,6 @@
 'use client'
 
-import { Inter } from "next/font/google";
+import { Cookie, Inter } from "next/font/google";
 import "./globals.css";
 import SearchAppBar from "./AppBar";
 import Box from '@mui/material/Box';
@@ -8,6 +8,7 @@ import { red } from '@mui/material/colors';
 import { getAllTips } from "./FireBaseWrapper";
 import { createTheme,ThemeProvider } from "@mui/material";
 import Button from "@mui/material";
+// import { CookiesProvider } from 'next-client-cookies/server';
 
 const theme = createTheme({
   palette: {
@@ -28,6 +29,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <ThemeProvider theme={theme}>
+          {/* <CookiesProvider> */}
           <SearchAppBar />
 
           <Box
@@ -37,6 +39,7 @@ export default function RootLayout({ children }) {
           >
             {children}
           </Box>
+          {/* </CookiesProvider> */}
         </ThemeProvider>
 
       </body>
