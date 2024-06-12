@@ -37,13 +37,15 @@ export default function TipCard({ el }) {
 
   function isItLiked(element) {
 
-    let local = JSON.parse(localStorage.getItem('cs2smokes_fav'))
+    let local = JSON.parse(localStorage?.getItem('cs2smokes_fav'))
 
-    let result = local.find(el_json=> JSON.stringify(el_json) === JSON.stringify(element))
+    let result = local?.find(el_json=> JSON.stringify(el_json) === JSON.stringify(element))
 
     if (result) {
+      // console.log('liked')
       return true;
     } else {
+      // console.log('not liked')
       return false
     }
     
@@ -82,6 +84,7 @@ export default function TipCard({ el }) {
       
       
     }
+    // console.log(JSON.parse(localStorage.getItem("cs2smokes_fav")))
   }
 
   function getYoutubeVideoId(url) {
