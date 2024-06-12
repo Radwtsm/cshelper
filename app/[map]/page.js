@@ -23,9 +23,12 @@ import NadeFilter from "../NadeFilter";
 import Link from "next/link";
 import Tip from "../Tip";
 import TipCard from "../TipCard";
+import { AccountCircle, Cancel } from "@mui/icons-material";
+import CancelIcon from '@mui/icons-material/Cancel';
 
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import GoTopBtn from "../goTopBtn";
+import { InputAdornment } from "@mui/material";
 
 const Page = ({ params }) => {
   let inputRef = useRef();
@@ -67,10 +70,11 @@ const Page = ({ params }) => {
       </Typography>
       </div>
 
-      <NadeFilter filters={filters} set={setFilters} />
+      <div className="flex flex-row items-center justify-around">
+      
       <GoTopBtn/>
       <div className="flex flex-row">
-        <TextField
+        {/* <TextField
           value={filters.title}
           ref={inputRef}
           id="filled-basic"
@@ -83,7 +87,30 @@ const Page = ({ params }) => {
           <Button variant="outlined" onClick={() => setFilters({ ...filters, title: "" })}>
             x
           </Button>
-        )}
+        )} */}
+
+      <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+        <TextField
+          
+          value={filters.title}
+          ref={inputRef}
+          id="filled-basic"
+          onChange={onChange}
+          label="Search..."
+          // variant="standard"
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <CancelIcon onClick={() => setFilters({ ...filters, title: "" })} sx={{ color: 'action.active', mr: 1, my: 0.5, visibility: filters.title ? 'visible' : 'hidden' }} />
+              </InputAdornment>
+            ),
+          }}
+          sx={{width: '100%'}}
+        />
+
+      </Box>
+      </div>
+      <NadeFilter filters={filters} set={setFilters} />
       </div>
       <div className=" flex flex-col gap-5 my-2">
 
@@ -98,6 +125,7 @@ const Page = ({ params }) => {
               <TipCard key={el.title} el={el}/>
             )) : <p>No elements</p>
           }
+
       </div>
       
 
