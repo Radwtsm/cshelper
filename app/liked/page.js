@@ -22,13 +22,13 @@ const Page = () => {
     <>    
     <div className='flex flex-row justify-between items-center'>
     <Typography sx={{color:'white',my:4}} variant="h5" gutterBottom>
-        PREFERITI
+        LIKED TRICKS
     </Typography>
-    <Button  variant="contained" color="error" onClick={onResetFav} disabled={likedTips.length > 0 ? false : true }>SVUOTA</Button>
+    {/* <Button  variant="contained" color="error" onClick={onResetFav}>RESET FAV</Button> */}
     <AlertDialog onaccept={onResetFav}/>
     </div>
     <div className=" flex flex-col gap-5 my-2">
-        {likedTips.length > 0 ? likedTips.map(el=><TipCard key={el.title} el={el}/>) : <Alert severity="error">{'Non è stato trovato nessun elemento'}</Alert>}
+        {likedTips.length > 0 ? likedTips.map(el=><TipCard key={el.title} el={el}/>) : <Alert severity="info">{'Comincia ad aggiungere elementi mettendo like'}</Alert>}
         
     </div>
     </>

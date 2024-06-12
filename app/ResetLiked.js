@@ -25,9 +25,9 @@ export default function AlertDialog({onaccept}) {
 
   return (
     <React.Fragment>
-      {/* <Button variant="outlined" onClick={handleClickOpen}>
+      <Button variant="outlined" onClick={handleClickOpen}>
         RESET PREFERITI
-      </Button> */}
+      </Button>
       <Dialog
         open={open}
         onClose={handleClose}
