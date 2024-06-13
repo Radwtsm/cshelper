@@ -134,7 +134,7 @@ function onVidReady(){
 
   return (
 
-    <Card id={el.title.replaceAll(' ','_').replaceAll('(','_').replaceAll(')','_').toLowerCase()}>
+    <Card sx={{maxHeight:'600px'}} id={el.title.replaceAll(' ','_').replaceAll('(','_').replaceAll(')','_').toLowerCase()}>
       
       <CardHeader title={el.title} sx={{ fontSize: "1px" }} />
 
@@ -144,9 +144,9 @@ function onVidReady(){
         style={{display: isReady ? 'block' : 'none'}}
           onReady={onVidReady}
           videoId={getYoutubeVideoId(el.embed_code)}
-          opts={{ height: '300px', width: "600px" }}
+          opts={{ height: '100%', width: "100%" }}
         />
-        <Skeleton animation="wave" variant="rectangular" width={600} height={300} sx={{display: isReady ? 'none' : 'block'}} />
+        <Skeleton animation="wave" variant="rectangular" height={150} sx={{display: isReady ? 'none' : 'block'}} />
         </>)
       )}
             
