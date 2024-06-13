@@ -26,7 +26,11 @@ export default function GoTopBtn() {
             }); 
           }; 
           
-          window.addEventListener('scroll', toggleVisible); 
+          React.useEffect(() => {
+            // window is accessible here.
+            window?.addEventListener('scroll', toggleVisible); 
+          }, []);
+          
     
 
   return (

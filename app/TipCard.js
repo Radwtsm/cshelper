@@ -22,6 +22,7 @@ import Alert from '@mui/material/Alert';
 import CheckIcon from '@mui/icons-material/Check';
 import YouTube from "react-youtube";
 import { Copse } from "next/font/google";
+import { Skeleton } from "@mui/material";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -39,6 +40,7 @@ export default function TipCard({ el }) {
   const [liked, setLiked] = React.useState(() =>
     isItLiked(el) ? true : false
   );
+  const [isReady,setIsReady] = React.useState(false)
 
   const [isCopied,setIsCopied] = React.useState(false)
 
@@ -61,6 +63,10 @@ export default function TipCard({ el }) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+function onVidReady(){
+  setIsReady(true)
+}
 
   function onTipLike(el) {
     // console.log('el',el)
@@ -133,11 +139,20 @@ export default function TipCard({ el }) {
       <CardHeader title={el.title} sx={{ fontSize: "1px" }} />
 
       {el.embed_code && (
+        ( <>
         <YouTube
+        style={{display: isReady ? 'block' : 'none'}}
+          onReady={onVidReady}
           videoId={getYoutubeVideoId(el.embed_code)}
-          opts={{ height: "100%", width: "100%" }}
+          opts={{ height: '300px', width: "600px" }}
         />
+        <Skeleton animation="wave" variant="rectangular" width={600} height={300} sx={{display: isReady ? 'none' : 'block'}} />
+        </>)
       )}
+            
+
+
+
 
       <CardContent>
         <Typography variant="body2" color="text.secondary">
