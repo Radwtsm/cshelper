@@ -139,15 +139,16 @@ function onVidReady(){
       <CardHeader title={el.title} sx={{ fontSize: "1px" }} />
 
       {el.embed_code && (
-        ( <>
+        ( <div style={{display:'flex', justifyContent:'center',alignItems:'center'}}>
         <YouTube
-        style={{display: isReady ? 'block' : 'none'}}
+        style={{display: isReady ? 'block' : 'none',aspectRatio: '16/9'}}
           onReady={onVidReady}
           videoId={getYoutubeVideoId(el.embed_code)}
-          opts={{ height: '100%', width: "100%" }}
+          opts={{ height: '315', width: "560" }}
+          // 560x315
         />
-        <Skeleton animation="wave" variant="rectangular" height={150} sx={{display: isReady ? 'none' : 'block'}} />
-        </>)
+        <Skeleton animation="wave" variant="rectangular" width={560} height={315} sx={{display: isReady ? 'none' : 'block'}} />
+        </div>)
       )}
             
 
@@ -163,9 +164,6 @@ function onVidReady(){
         <IconButton onClick={() => onTipLike(el)} aria-label="add to favorites">
           {liked === false ? <FavoriteBorderIcon /> : <FavoriteIcon />}
         </IconButton>
-        {/* <IconButton onClick={()=>copyToClipBoard(el)} aria-label="add to favorites">
-          <ShareIcon/>
-        </IconButton> */}
       </CardActions>
     </Card>
 
