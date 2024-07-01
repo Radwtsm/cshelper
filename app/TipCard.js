@@ -20,9 +20,13 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 // import ShareIcon from '@mui/icons-material/Share';
 import Alert from '@mui/material/Alert';
 import CheckIcon from '@mui/icons-material/Check';
-import YouTube from "react-youtube";
+// import YouTube from "react-youtube";
 import { Copse } from "next/font/google";
 import { Skeleton } from "@mui/material";
+
+import dynamic from 'next/dynamic'
+
+const YouTube = dynamic(()=>import("react-youtube"))
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -35,6 +39,10 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
+const thumbnail = () => {
+
+}
+
 export default function TipCard({ el }) {
   const [expanded, setExpanded] = React.useState(false);
   const [liked, setLiked] = React.useState(() =>
@@ -44,8 +52,14 @@ export default function TipCard({ el }) {
 
   const [isCopied,setIsCopied] = React.useState(false)
 
+  const [isClicked,setIsClicked] = React.useState(false)
+
   function isItLiked(element) {
-    let local = JSON.parse(localStorage?.getItem("cs2smokes_fav"));
+    let local;
+    if (typeof window !== "undefined") {
+      local = JSON.parse(localStorage ?  localStorage?.getItem("cs2smokes_fav") : {});
+    }
+    
 
     let result = local?.find(
       (el_json) => JSON.stringify(el_json) === JSON.stringify(element)
@@ -117,15 +131,6 @@ function onVidReady(){
     
     navigator.clipboard.writeText(url)
 
-    // const shareData = {
-    //   title: el.title,
-    //   text: el.description,
-    //   url,
-    // };
-
-    // navigator.share(shareData)
-
-    // alert('copiato url!')
     setIsCopied(true)
     setTimeout(() => {
       setIsCopied(false)
@@ -136,20 +141,19 @@ function onVidReady(){
 
     <Card sx={{maxHeight:'600px'}} id={el.title.replaceAll(' ','_').replaceAll('(','_').replaceAll(')','_').toLowerCase()}>
       
-      <CardHeader title={el.title} sx={{ fontSize: "1px" }} />
+      <CardHeader title={el.title} sx={{ fontSize: "1rem" }} />
 
-      {el.embed_code && (
-        ( <div style={{display:'flex', justifyContent:'center',alignItems:'center'}}>
+      {(isClicked && el.embed_code) ? (
+        (<div style={{display:'flex', justifyContent:'center',alignItems:'center'}}>
         <YouTube
         style={{display: isReady ? 'block' : 'none',aspectRatio: '16/9'}}
           onReady={onVidReady}
           videoId={getYoutubeVideoId(el.embed_code)}
           opts={{ height: '315', width: "560" }}
-          // 560x315
         />
         <Skeleton animation="wave" variant="rectangular" width={560} height={315} sx={{display: isReady ? 'none' : 'block'}} />
         </div>)
-      )}
+      ) : <img onClick={()=>setIsClicked(true)} width={'100%'} height={'100%'} src={`http://img.youtube.com/vi/${getYoutubeVideoId(el.embed_code)}/0.jpg`}/>} 
             
 
 
@@ -162,7 +166,7 @@ function onVidReady(){
       </CardContent>
       <CardActions disableSpacing>
         <IconButton onClick={() => onTipLike(el)} aria-label="add to favorites">
-          {liked === false ? <FavoriteBorderIcon /> : <FavoriteIcon />}
+          {!liked ? <FavoriteBorderIcon /> : <FavoriteIcon />}
         </IconButton>
       </CardActions>
     </Card>

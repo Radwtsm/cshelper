@@ -76,7 +76,6 @@ export default function SearchAppBar() {
   const [isBackVisible,setIsBackVisible] = React.useState(false)
   
   React.useEffect(()=>{
-  //  console.log(pathname) 
    if (pathname != '/') {
     setIsBackVisible(true)
    } else {

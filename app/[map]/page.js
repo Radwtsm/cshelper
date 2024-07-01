@@ -29,8 +29,11 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import GoTopBtn from "../goTopBtn";
 import { InputAdornment } from "@mui/material";
+import { useMemo } from "react";
 
 import {Alert} from "@mui/material";
+
+
 
 const Page = ({ params }) => {
   let inputRef = useRef();
@@ -38,7 +41,7 @@ const Page = ({ params }) => {
   let backup_data = useContext(TipsContext).filter(
     (el) => el.map.toLowerCase() == params.map.toLowerCase()
   );
-
+  
 
   let [filters, setFilters] = useState({
     title: "",
@@ -59,9 +62,27 @@ const Page = ({ params }) => {
   }
 
   function onChange(e) {
-    const title = e.target.value;
-    setFilters({ ...filters, title });
+    // const title = e.target.value;
+    setFilters({ ...filters, title:e.target.value });
   }
+
+  // ...
+
+
+
+const tipCards = useMemo(() => {
+  return backup_data
+    .filter(
+      (el) =>
+        el.title.toLowerCase().includes(filters.title.toLowerCase()) &&
+        el.utility.includes(filters.utility)
+    )
+    .map((el) => <TipCard key={el.title} el={el} />);
+}, [backup_data, filters]);
+
+
+  
+
 
   return (
     <>
@@ -76,21 +97,6 @@ const Page = ({ params }) => {
       
       <GoTopBtn/>
       <div className="flex flex-row">
-        {/* <TextField
-          value={filters.title}
-          ref={inputRef}
-          id="filled-basic"
-          onChange={onChange}
-          label="Search..."
-          variant="filled"
-          sx={{width: '100%'}}
-        />
-        {filters.title && (
-          <Button variant="outlined" onClick={() => setFilters({ ...filters, title: "" })}>
-            x
-          </Button>
-        )} */}
-
       <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
         <TextField
           
@@ -115,23 +121,8 @@ const Page = ({ params }) => {
       <NadeFilter filters={filters} set={setFilters} />
       </div>
       <div className=" flex flex-col gap-5 my-2">
-
-          {
-            backup_data
-            .filter(
-              (el) =>
-                el.title.toLowerCase().includes(filters.title.toLowerCase()) &&
-                el.utility.includes(filters.utility)
-            ).length > 0 ? backup_data
-            .filter(
-              (el) =>
-                el.title.toLowerCase().includes(filters.title.toLowerCase()) &&
-                el.utility.includes(filters.utility)
-            )
-            .map((el) => (
-              <TipCard key={el.title} el={el}/>
-            )) : <Alert severity="error">{'Non è stato trovato nessun elemento'}</Alert>
-          }
+          {/* prende tutti i tips associati alla mappa + filtrati */}
+          {tipCards.length > 0 ? tipCards : <Alert severity="error">{'Non è stato trovato nessun elemento'}</Alert>}
 
       </div>
       

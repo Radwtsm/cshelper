@@ -138,6 +138,15 @@ export const TipsContext = createContext([
         map: 'inferno',
         side: 'T',
     },
+    {
+        title: 'SMOKE MID XBOX (SECOND MID)',
+        description: 'throw',
+        utility:'smoke',
+        embed_code: 'https://youtu.be/XqrwexeWbu4?si=dOxPF4fHKadD0DBY',
+        map: 'dust',
+        side: 'T',
+    },
+
 
 
 

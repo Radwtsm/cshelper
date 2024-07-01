@@ -35,7 +35,8 @@ export default function RootLayout({ children }) {
           <SearchAppBar />
 
           <Box
-            my={4}
+            mb={2}
+            // mt={1}
             mx={0}
             p={2}
           >

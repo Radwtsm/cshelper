@@ -16,7 +16,6 @@ const Page = () => {
     
   }
 
-//   useEffect(,)
 
   return (
     <>    
@@ -24,7 +23,6 @@ const Page = () => {
     <Typography sx={{color:'white',my:4}} variant="h5" gutterBottom>
         LIKED TRICKS
     </Typography>
-    {/* <Button  variant="contained" color="error" onClick={onResetFav}>RESET FAV</Button> */}
     <AlertDialog onaccept={onResetFav}/>
     </div>
     <div className=" flex flex-col gap-5 my-2">
