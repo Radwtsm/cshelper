@@ -21,7 +21,7 @@ export default function OutlinedCard({ name, code, icon, commento }) {
               <Typography variant="body2">{commento}</Typography>
             </div>
 
-            <Image src={`/maps/${code}.png`} width={500} height={500} />
+            <Image src={`/maps/${code}.png`} width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto' }}  />
           </CardContent>
         </React.Fragment>
       </Card>

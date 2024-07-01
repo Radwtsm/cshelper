@@ -75,6 +75,14 @@ export default function TipCard({ el }) {
     }
   }
 
+  const opts = {
+    // height: '390',
+    // width: '640',
+    playerVars: {
+      // https://developers.google.com/youtube/player_parameters
+      autoplay: 1,
+    },
+  };
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -146,11 +154,11 @@ function onVidReady(){
 
       {(isClicked && el.embed_code) ? (
         (<div style={{display:'flex', justifyContent:'center',alignItems:'center'}}>
-        <YouTube
-        style={{display: isReady ? 'block' : 'none',aspectRatio: '16/9'}}
+        <YouTube opts={{opts}}
+          style={{display: isReady ? 'block' : 'none',aspectRatio: '16/9'}}
           onReady={onVidReady}
           videoId={getYoutubeVideoId(el.embed_code)}
-          opts={{ height: '315', width: "560" }}
+          // opts={{ height: '315', width: "560" }}
         />
         <Skeleton animation="wave" variant="rectangular" width={560} height={315} sx={{display: isReady ? 'none' : 'block'}} />
         </div>)
