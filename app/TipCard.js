@@ -25,6 +25,7 @@ import { Copse } from "next/font/google";
 import { Skeleton } from "@mui/material";
 
 import dynamic from 'next/dynamic'
+import Image from "next/image";
 
 const YouTube = dynamic(()=>import("react-youtube"))
 
@@ -153,7 +154,12 @@ function onVidReady(){
         />
         <Skeleton animation="wave" variant="rectangular" width={560} height={315} sx={{display: isReady ? 'none' : 'block'}} />
         </div>)
-      ) : <img onClick={()=>setIsClicked(true)} width={'100%'} height={'100%'} src={`http://img.youtube.com/vi/${getYoutubeVideoId(el.embed_code)}/0.jpg`}/>} 
+      ) : <Image
+      width={0}
+      height={0}
+      sizes="100vw"
+      style={{ width: '100%', height: 'auto' }} // optional
+      onClick={()=>setIsClicked(true)}  src={`http://img.youtube.com/vi/${getYoutubeVideoId(el.embed_code)}/0.jpg`}/>} 
             
 
 
