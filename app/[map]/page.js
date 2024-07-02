@@ -33,6 +33,11 @@ import { useMemo } from "react";
 
 import {Alert} from "@mui/material";
 
+// import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Unstable_Grid2';
+
+
 
 
 const Page = ({ params }) => {
@@ -77,7 +82,7 @@ const tipCards = useMemo(() => {
         el.title.toLowerCase().includes(filters.title.toLowerCase()) &&
         el.utility.includes(filters.utility)
     )
-    .map((el) => <TipCard key={el.title} el={el} />);
+    .map((el) => <Grid sx={{ flexGrow: 1 }} xs={8} lg={4}><TipCard  key={el.title} el={el} /></Grid>);
 }, [backup_data, filters]);
 
 
@@ -96,6 +101,8 @@ const tipCards = useMemo(() => {
       <div className="flex flex-row items-center justify-around gap-2">
       
       <GoTopBtn/>
+      
+      <div className="flex flex-row h-100 my-5 gap-2">
       <div className="flex flex-row">
       <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
         <TextField
@@ -119,12 +126,15 @@ const tipCards = useMemo(() => {
       </Box>
       </div>
       <NadeFilter filters={filters} set={setFilters} />
-      </div>
-      <div className=" flex flex-col gap-5 my-2">
-          {/* prende tutti i tips associati alla mappa + filtrati */}
-          {tipCards.length > 0 ? tipCards : <Alert severity="error">{'Non è stato trovato nessun elemento'}</Alert>}
+</div>
 
       </div>
+      {/* <div className=" flex flex-col gap-5 my-2"> */}
+      <Grid container spacing={2}>
+          {/* prende tutti i tips associati alla mappa + filtrati */}
+          {tipCards.length > 0 ? tipCards : <Alert sx={{width:'100%'}} severity="error">{'Non è stato trovato nessun elemento'}</Alert>}
+          </Grid>
+      {/* </div> */}
       
 
     </>

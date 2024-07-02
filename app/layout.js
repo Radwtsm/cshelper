@@ -8,6 +8,7 @@ import { red } from '@mui/material/colors';
 import { getAllTips } from "./FireBaseWrapper";
 import { createTheme,ThemeProvider, responsiveFontSizes } from "@mui/material";
 import Button from "@mui/material";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 // import { CookiesProvider } from 'next-client-cookies/server';
 
 const theme = responsiveFontSizes(createTheme({
@@ -36,13 +37,13 @@ export default function RootLayout({ children }) {
 
           <Box
             mb={2}
-            // mt={1}
             mx={0}
             p={2}
           >
             {children}
+            <SpeedInsights />
+
           </Box>
-          {/* </CookiesProvider> */}
         </ThemeProvider>
 
       </body>

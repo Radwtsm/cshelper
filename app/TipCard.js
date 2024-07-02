@@ -161,21 +161,23 @@ export default function TipCard({ el }) {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            width:'100%'
           }}
         >
           <YouTube
-            style={{ display: isReady ? "block" : "none", aspectRatio: "16/9" }}
+            style={{ display: isReady ? "block" : "none", aspectRatio: "16/9", width:'100%' }}
             onReady={onVidReady}
             videoId={getYoutubeVideoId(el.embed_code)}
-            opts={{ height: "315", width: "560" }}
+            // opts={{height:'100%'}}
+            opts={{ height: "315",width:'100%'}}
             // 560x315
           />
           <Skeleton
             animation="wave"
             variant="rectangular"
-            width={560}
+            // width={560}
             height={315}
-            sx={{ display: isReady ? "none" : "block" }}
+            sx={{ display: isReady ? "none" : "block",aspectRatio: '16/9' }}
           />
         </div>
       ) : (
@@ -185,7 +187,7 @@ export default function TipCard({ el }) {
           onClick={() => setIsClicked(true)}
           src={`http://img.youtube.com/vi/${getYoutubeVideoId(
             el.embed_code
-          )}/mqdefault.jpg`}
+          )}/0.jpg`}
         />
       )}
       <CardContent>

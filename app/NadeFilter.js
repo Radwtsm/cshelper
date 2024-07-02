@@ -43,7 +43,7 @@ export default function NadeFilter({filters, set}) {
     // </ToggleButtonGroup>
 
     <ToggleButtonGroup
-    className='my-5 flex flex-row'
+    className=' flex flex-row'
   color="primary"
   value={value}
   exclusive
