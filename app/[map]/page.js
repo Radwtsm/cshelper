@@ -81,8 +81,8 @@ const tipCards = useMemo(() => {
       (el) =>
         el.title.toLowerCase().includes(filters.title.toLowerCase()) &&
         el.utility.includes(filters.utility)
-    )
-    .map((el) => <Grid sx={{ flexGrow: 1 }} xs={12} md={4} lg={3}><TipCard  key={el.title} el={el} /></Grid>);
+    ) 
+    .map((el) => <Grid key={el.title} sx={{ flexGrow: 1 }} xs={12} md={4} lg={3}><TipCard  key={el.title} el={el} /></Grid>);
 }, [backup_data, filters]);
 
 
