@@ -18,16 +18,12 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 // import ShareIcon from '@mui/icons-material/Share';
-import Alert from '@mui/material/Alert';
-import CheckIcon from '@mui/icons-material/Check';
-// import YouTube from "react-youtube";
+import Alert from "@mui/material/Alert";
+import CheckIcon from "@mui/icons-material/Check";
+import YouTube from "react-youtube";
 import { Copse } from "next/font/google";
 import { Skeleton } from "@mui/material";
-
-import dynamic from 'next/dynamic'
 import Image from "next/image";
-
-const YouTube = dynamic(()=>import("react-youtube"))
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -40,27 +36,25 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-const thumbnail = () => {
-
-}
-
 export default function TipCard({ el }) {
   const [expanded, setExpanded] = React.useState(false);
   const [liked, setLiked] = React.useState(() =>
     isItLiked(el) ? true : false
   );
-  const [isReady,setIsReady] = React.useState(false)
+  const [isReady, setIsReady] = React.useState(false);
 
-  const [isCopied,setIsCopied] = React.useState(false)
+  const [isCopied, setIsCopied] = React.useState(false);
 
-  const [isClicked,setIsClicked] = React.useState(false)
+  const [isClicked, setIsClicked] = React.useState(false);
 
   function isItLiked(element) {
     let local;
     if (typeof window !== "undefined") {
-      local = JSON.parse(localStorage ?  localStorage?.getItem("cs2smokes_fav") : {});
+      local = localStorage.getItem("cs2smokes_fav")
+        ? JSON.parse(localStorage?.getItem("cs2smokes_fav"))
+        : null;
     }
-    
+    // let local = JSON.parse(localStorage?.getItem("cs2smokes_fav"));
 
     let result = local?.find(
       (el_json) => JSON.stringify(el_json) === JSON.stringify(element)
@@ -75,21 +69,13 @@ export default function TipCard({ el }) {
     }
   }
 
-  const opts = {
-    // height: '390',
-    // width: '640',
-    playerVars: {
-      // https://developers.google.com/youtube/player_parameters
-      autoplay: 1,
-    },
-  };
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-function onVidReady(){
-  setIsReady(true)
-}
+  function onVidReady() {
+    setIsReady(true);
+  }
 
   function onTipLike(el) {
     // console.log('el',el)
@@ -129,50 +115,79 @@ function onVidReady(){
     return match && match[1];
   }
 
-  function copyToClipBoard(el){
+  function copyToClipBoard(el) {
+    let id = el.title
+      .replaceAll(" ", "_")
+      .replaceAll("(", "_")
+      .replaceAll(")", "_")
+      .toLowerCase();
 
-    let id = el.title.replaceAll(' ','_').replaceAll('(','_').replaceAll(')','_').toLowerCase()
+    console.log("id", id);
+    console.log(window.location.href);
 
-    console.log('id',id)
-    console.log(window.location.href)
+    let url = window.location.href + "#" + id;
 
-    let url = window.location.href + '#' + id
-    
-    navigator.clipboard.writeText(url)
+    navigator.clipboard.writeText(url);
 
-    setIsCopied(true)
+    // const shareData = {
+    //   title: el.title,
+    //   text: el.description,
+    //   url,
+    // };
+
+    // navigator.share(shareData)
+
+    // alert('copiato url!')
+    setIsCopied(true);
     setTimeout(() => {
-      setIsCopied(false)
+      setIsCopied(false);
     }, 4000);
   }
 
   return (
+    <Card
+      sx={{ maxHeight: "600px" }}
+      id={el.title
+        .replaceAll(" ", "_")
+        .replaceAll("(", "_")
+        .replaceAll(")", "_")
+        .toLowerCase()}
+    >
+      <CardHeader title={el.title} sx={{ fontSize: "1px" }} />
 
-    <Card sx={{maxHeight:'600px'}} id={el.title.replaceAll(' ','_').replaceAll('(','_').replaceAll(')','_').toLowerCase()}>
-      
-      <CardHeader title={el.title} sx={{ fontSize: "1rem" }} />
-
-      {(isClicked && el.embed_code) ? (
-        (<div style={{display:'flex', justifyContent:'center',alignItems:'center'}}>
-        <YouTube opts={{opts}}
-          style={{display: isReady ? 'block' : 'none',aspectRatio: '16/9'}}
-          onReady={onVidReady}
-          videoId={getYoutubeVideoId(el.embed_code)}
-          // opts={{ height: '315', width: "560" }}
+      {isClicked ? (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <YouTube
+            style={{ display: isReady ? "block" : "none", aspectRatio: "16/9" }}
+            onReady={onVidReady}
+            videoId={getYoutubeVideoId(el.embed_code)}
+            opts={{ height: "315", width: "560" }}
+            // 560x315
+          />
+          <Skeleton
+            animation="wave"
+            variant="rectangular"
+            width={560}
+            height={315}
+            sx={{ display: isReady ? "none" : "block" }}
+          />
+        </div>
+      ) : (
+        <Image
+          height={315}
+          width={560}
+          onClick={() => setIsClicked(true)}
+          src={`http://img.youtube.com/vi/${getYoutubeVideoId(
+            el.embed_code
+          )}/mqdefault.jpg`}
         />
-        <Skeleton animation="wave" variant="rectangular" width={560} height={315} sx={{display: isReady ? 'none' : 'block'}} />
-        </div>)
-      ) : <Image
-      width={0}
-      height={0}
-      sizes="100vw"
-      style={{ width: '100%', height: 'auto' }} // optional
-      onClick={()=>setIsClicked(true)}  src={`http://img.youtube.com/vi/${getYoutubeVideoId(el.embed_code)}/0.jpg`}/>} 
-            
-
-
-
-
+      )}
       <CardContent>
         <Typography variant="body2" color="text.secondary">
           {el.description}
@@ -184,6 +199,5 @@ function onVidReady(){
         </IconButton>
       </CardActions>
     </Card>
-
   );
 }
