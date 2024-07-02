@@ -146,7 +146,7 @@ export default function TipCard({ el }) {
 
   return (
     <Card
-      sx={{ maxHeight: "600px" }}
+      sx={{ height: "500px",width:'320px',marginLeft:'auto',marginRight:'auto' }}
       id={el.title
         .replaceAll(" ", "_")
         .replaceAll("(", "_")
@@ -184,6 +184,8 @@ export default function TipCard({ el }) {
         <Image
           height={315}
           width={560}
+          className="w-100"
+          // width={560}
           onClick={() => setIsClicked(true)}
           src={`http://img.youtube.com/vi/${getYoutubeVideoId(
             el.embed_code
